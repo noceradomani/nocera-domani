@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nocera Domani — Stati Generali dei Progressisti, Riformisti e Moderati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blu: #23284f;
+    --blu-dark: #0b0d1f;
+    --blu-mid: #363c72;
+    --blu-light: #eeeef6;
+    --oro: #c9a84c;
+    --oro-light: #f0d9a0;
+    --oro-dark: #7a5a10;
+    --bianco: #ffffff;
+    --sfondo: #f4f4f8;
+    --bordo: #dddde8;
+    --testo2: #9b9db8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--sfondo);
+    color: var(--blu-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(35,40,79,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--oro);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--bianco);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .nav-logo span { color: var(--oro); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--oro); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--blu);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(54,60,114,0.6) 0%, transparent 60%);
+  }
+
+  .hero-line-accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--oro);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 120px 80px 80px 86px;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(72px, 12vw, 140px);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: var(--bianco);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title .oro { color: var(--oro); }
+
+  .hero-divider {
+    width: 80px;
+    height: 3px;
+    background: var(--oro);
+    margin: 32px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 400;
+    font-size: clamp(16px, 2vw, 22px);
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.7);
+    max-width: 540px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blu-dark);
+    background: var(--oro);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--oro-light); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bianco);
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--oro); color: var(--oro); }
+
+  .hero-bottom {
+    position: relative;
+    z-index: 2;
+    padding: 32px 86px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: var(--oro);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .hero-sep { width: 1px; height: 40px; background: rgba(255,255,255,0.15); }
+
+  /* ── SEZIONI COMUNI ── */
+  section { padding: 100px 80px; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--oro);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    color: var(--blu);
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  .section-intro {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #5c6494;
+    max-width: 580px;
+  }
+
+  /* ── CLAIM ── */
+  #claim {
+    background: var(--blu-dark);
+    padding: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #claim::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--oro);
+  }
+  #claim::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--oro);
+  }
+
+  .claim-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    font-size: clamp(24px, 4vw, 48px);
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+    letter-spacing: 1px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .claim-text strong {
+    color: var(--oro);
+    font-weight: 900;
+    display: block;
+    font-size: clamp(32px, 5vw, 60px);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  /* ── PERCORSO ── */
+  #percorso {
+    background: var(--bianco);
+  }
+
+  .percorso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+
+  .percorso-intro { }
+
+  .fasi-list { display: flex; flex-direction: column; gap: 0; }
+
+  .fase-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--bordo);
+    position: relative;
+  }
+  .fase-item:last-child { border-bottom: none; }
+
+  .fase-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: var(--bordo);
+    line-height: 1;
+    min-width: 52px;
+    transition: color 0.3s;
+  }
+  .fase-item:hover .fase-num { color: var(--oro); }
+
+  .fase-body {}
+
+  .fase-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--testo2);
+    margin-bottom: 6px;
+  }
+
+  .fase-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--blu);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .fase-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #5c6494;
+  }
+
+  /* ── CHI PARTECIPA / METODO / OBIETTIVO ── */
+  #chi {
+    background: var(--sfondo);
+    padding: 100px 80px;
+  }
+
+  .chi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: var(--bordo);
+  }
+
+  .chi-card {
+    background: var(--bianco);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .chi-card:hover { transform: translateY(-4px); }
+
+  .chi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--bordo);
+    transition: background 0.3s;
+  }
+  .chi-card:hover::before { background: var(--oro); }
+
+  .chi-card-icon {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 56px;
+    color: var(--blu-light);
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -2px;
+  }
+
+  .chi-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 12px;
+  }
+
+  .chi-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--blu);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+  }
+
+  .chi-card-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #5c6494;
+  }
+
+  /* ── TAVOLI ── */
+  #tavoli {
+    background: var(--blu);
+    padding: 100px 80px;
+  }
+
+  #tavoli .section-title { color: var(--bianco); }
+  #tavoli .section-intro { color: rgba(255,255,255,0.55); }
+
+  .tavoli-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .tavolo-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 32px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .tavolo-item:hover { background: rgba(201,168,76,0.07); }
+  .tavolo-item:hover .tavolo-num { color: var(--oro); }
+
+  .tavolo-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 16px; right: 20px;
+    transition: color 0.3s;
+  }
+
+  .tavolo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--bianco);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    max-width: 160px;
+  }
+
+  .tavolo-line {
+    width: 32px;
+    height: 2px;
+    background: var(--oro);
+    margin-bottom: 16px;
+  }
+
+  .tavolo-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── MANIFESTO ── */
+  #manifesto {
+    background: var(--bianco);
+    padding: 100px 80px;
+  }
+
+  .manifesto-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+
+  .valori-list { display: flex; flex-direction: column; gap: 24px; }
+
+  .valore-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--sfondo);
+    border-left: 3px solid var(--bordo);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .valore-item:hover { border-color: var(--oro); background: #faf9f5; }
+
+  .valore-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--oro);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .valore-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #363c72;
+  }
+  .valore-text strong {
+    font-weight: 600;
+    color: var(--blu);
+  }
+
+  .manifesto-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .quote-block {
+    background: var(--blu);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--oro);
+  }
+
+  .quote-mark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 120px;
+    color: rgba(201,168,76,0.15);
+    line-height: 0.7;
+    margin-bottom: 16px;
+  }
+
+  .quote-content {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .quote-content strong {
+    font-weight: 900;
+    color: var(--oro);
+    font-style: normal;
+    display: block;
+    font-size: 26px;
+    margin-top: 8px;
+  }
+
+  .quote-author {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .sindaco-card {
+    margin-top: 24px;
+    padding: 32px;
+    background: var(--sfondo);
+    border: 1px solid var(--bordo);
+  }
+
+  .sindaco-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--blu);
+    letter-spacing: 0.5px;
+  }
+
+  .sindaco-role {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--testo2);
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  .sindaco-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5c6494;
+  }
+
+  /* ── PARTECIPA ── */
+  #partecipa {
+    background: var(--oro);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #partecipa::before {
+    content: 'PARTECIPA';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 200px;
+    color: rgba(35,40,79,0.06);
+    letter-spacing: -8px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .partecipa-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  #partecipa .section-label { color: var(--blu-mid); }
+  #partecipa .section-label::before { background: var(--blu-mid); }
+  #partecipa .section-title { color: var(--blu-dark); }
+  #partecipa .section-intro { color: var(--blu-mid); }
+
+  .modi-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .modo-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(35,40,79,0.08);
+    border-left: 3px solid var(--blu);
+  }
+
+  .modo-icon {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--blu);
+    min-width: 32px;
+  }
+
+  .modo-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--blu-dark);
+  }
+  .modo-text strong { font-weight: 600; display: block; }
+
+  .partecipa-form {
+    background: var(--bianco);
+    padding: 48px;
+    box-shadow: 0 20px 60px rgba(35,40,79,0.15);
+  }
+
+  .form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blu);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .form-subtitle {
+    font-size: 13px;
+    color: var(--testo2);
+    margin-bottom: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blu-mid);
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--bordo);
+    background: var(--sfondo);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--blu-dark);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--blu);
+  }
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--blu);
+    color: var(--bianco);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--blu-mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blu-dark);
+    padding: 64px 80px 40px;
+    border-top: 4px solid var(--oro);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+
+  .footer-brand {}
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--bianco);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .footer-logo span { color: var(--oro); }
+
+  .footer-tagline {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.4);
+    max-width: 280px;
+  }
+
+  .footer-hashtag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--oro);
+  }
+
+  .footer-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--oro); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-claim {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.3);
+    font-style: italic;
+  }
+
+  /* ── ANIMAZIONI ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section, #chi, #tavoli, #manifesto, #partecipa, footer { padding: 64px 24px; }
+    #hero { padding: 0; }
+    .hero-content { padding: 100px 30px 40px 36px; }
+    .hero-bottom { padding: 24px 30px; flex-wrap: wrap; gap: 24px; }
+    .percorso-grid, .manifesto-layout, .partecipa-layout, .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .chi-grid, .tavoli-grid { grid-template-columns: 1fr; }
+    #claim { padding: 60px 24px; }
+    #claim::before, #claim::after { display: none; }
+    .manifesto-sidebar { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">NOCERA <span>DOMANI</span></a>
+  <ul class="nav-links">
+    <li><a href="#percorso">Il percorso</a></li>
+    <li><a href="#chi">Chi partecipa</a></li>
+    <li><a href="#tavoli">I tavoli</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#partecipa">Partecipa</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-line-accent"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Nocera Inferiore · Stati Generali 2026</div>
+    <h1 class="hero-title">NOCERA<br><span class="oro">DOMANI</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Stati Generali dei Progressisti,<br>Riformisti e Moderati di Nocera Inferiore.<br>Un processo aperto, partecipato e costituente.</p>
+    <div class="hero-cta">
+      <a href="#percorso" class="btn-primary">Scopri il percorso</a>
+      <a href="#partecipa" class="btn-secondary">Partecipa</a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-stat">
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">Tavoli tematici</div>
+    </div>
+    <div class="hero-sep"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4</div>
+      <div class="hero-stat-label">Fasi del percorso</div>
+    </div>
+    <div class="hero-sep"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2027</div>
+      <div class="hero-stat-label">L'obiettivo</div>
+    </div>
+    <div class="hero-sep"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">∞</div>
+      <div class="hero-stat-label">Partecipanti attesi</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAIM -->
+<div id="claim">
+  <p class="claim-text">
+    Il passato va riconosciuto. Il presente va governato.
+    <strong>Il futuro va costruito.</strong>
+  </p>
+</div>
+
+<!-- PERCORSO -->
+<section id="percorso">
+  <div class="section-label">Il percorso</div>
+  <h2 class="section-title reveal">Quattro fasi<br>per costruire insieme</h2>
+  <p class="section-intro reveal">Un processo politico vero, non un evento simbolico. Dalla fase di lancio all'assemblea cittadina conclusiva, ogni tappa è pubblica, partecipata e orientata alla sintesi.</p>
+
+  <div class="percorso-grid">
+    <div class="reveal">
+      <p style="font-size:15px;line-height:1.8;color:#5c6494;margin-bottom:32px;">
+        Gli Stati Generali dei Progressisti, Riformisti e Moderati di Nocera Inferiore nascono dalla convinzione che nessuna fase politica nuova nasca da sola. Si costruisce — con serietà, metodo e coraggio — a partire dalla guida del Sindaco <strong style="color:var(--blu)">Paolo De Maio</strong> e da una coalizione che si allarga e si rafforza.
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#5c6494;margin-bottom:32px;">
+        Il percorso è aperto a partiti, associazioni, forze civiche e singoli cittadini che condividano un orizzonte chiaramente alternativo alle destre, fondato su responsabilità istituzionale, coesione sociale e partecipazione democratica.
+      </p>
+      <a href="#partecipa" class="btn-primary" style="display:inline-block">Partecipa al percorso</a>
+    </div>
+
+    <div class="fasi-list reveal">
+      <div class="fase-item">
+        <div class="fase-num">01</div>
+        <div class="fase-body">
+          <div class="fase-tag">Febbraio 2026</div>
+          <div class="fase-title">Lancio e apertura</div>
+          <div class="fase-desc">Presentazione pubblica degli Stati Generali, adozione del Manifesto, avvio della raccolta di contributi scritti.</div>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">02</div>
+        <div class="fase-body">
+          <div class="fase-tag">Marzo – Aprile 2026</div>
+          <div class="fase-title">Ascolto sul territorio</div>
+          <div class="fase-desc">Incontri aperti nei quartieri e con le realtà associative, economiche e civiche della città.</div>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">03</div>
+        <div class="fase-body">
+          <div class="fase-tag">Aprile – Maggio 2026</div>
+          <div class="fase-title">Tavoli tematici</div>
+          <div class="fase-desc">Sei tavoli di lavoro su altrettante aree: coesione, giovani, territorio, economia, cultura, democrazia locale.</div>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">04</div>
+        <div class="fase-body">
+          <div class="fase-tag">Giugno 2026</div>
+          <div class="fase-title">Assemblea conclusiva</div>
+          <div class="fase-desc">Presentazione e ratifica politica del documento programmatico finale. Lancio della roadmap verso il 2027.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHI / METODO / OBIETTIVO -->
+<section id="chi">
+  <div class="section-label">Chi, come, perché</div>
+  <h2 class="section-title reveal">Chi partecipa,<br>il metodo, l'obiettivo</h2>
+
+  <div class="chi-grid">
+    <div class="chi-card reveal">
+      <div class="chi-card-icon">01</div>
+      <div class="chi-card-label">Chi partecipa</div>
+      <div class="chi-card-title">Un percorso aperto a tutti</div>
+      <div class="chi-card-text">Partiti, liste e movimenti della coalizione dei Progressisti, Riformisti e Moderati, associazioni, categorie economiche, ordini professionali, forze civiche, realtà culturali e sociali, singole cittadine e singoli cittadini. Chiunque condivida un orizzonte chiaramente alternativo alle destre e fondato su responsabilità istituzionale, coesione sociale e partecipazione democratica.</div>
+    </div>
+    <div class="chi-card reveal">
+      <div class="chi-card-icon">02</div>
+      <div class="chi-card-label">Il metodo</div>
+      <div class="chi-card-title">Ascolto, confronto, sintesi</div>
+      <div class="chi-card-text">Una fase di ascolto sul territorio, sei tavoli tematici aperti — su coesione sociale, giovani e opportunità, territorio e sostenibilità, economia e lavoro, cultura e identità, qualità della democrazia locale — una sintesi programmatica condivisa e un'assemblea cittadina conclusiva. I materiali prodotti sono pubblici e accessibili.</div>
+    </div>
+    <div class="chi-card reveal">
+      <div class="chi-card-icon">03</div>
+      <div class="chi-card-label">L'obiettivo</div>
+      <div class="chi-card-title">Un progetto per il 2027 e oltre</div>
+      <div class="chi-card-text">Rafforzare l'alleanza dei Progressisti, Riformisti e Moderati come progetto politico condiviso — non come semplice sommatoria elettorale. Costruire una proposta credibile, inclusiva e unitaria per governare Nocera Inferiore nel 2027 e oltre, a partire dalla guida del Sindaco Paolo De Maio e da una coalizione allargata, capace di parlare alla città reale.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TAVOLI -->
+<section id="tavoli">
+  <div class="section-label">I tavoli tematici</div>
+  <h2 class="section-title reveal">Sei aree,<br>sei confronti aperti</h2>
+  <p class="section-intro reveal">Ogni tavolo si riunisce almeno due volte e produce un documento di sintesi pubblico. I contributi di ogni tavolo confluiscono nel documento programmatico finale.</p>
+
+  <div class="tavoli-grid">
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">01</div>
+      <div class="tavolo-name">Coesione Sociale</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Diritti sociali, inclusione attiva, dignità, fragilità e reti di prossimità.</div>
+    </div>
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">02</div>
+      <div class="tavolo-name">Giovani e Opportunità</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Formazione, cultura, competenze e spazi di protagonismo per le nuove generazioni.</div>
+    </div>
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">03</div>
+      <div class="tavolo-name">Territorio e Sostenibilità</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Rigenerazione urbana, mobilità sostenibile, qualità dello spazio pubblico, centro e periferie.</div>
+    </div>
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">04</div>
+      <div class="tavolo-name">Economia e Lavoro</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Lavoro dignitoso, innovazione, dialogo con imprese, artigianato, commercio e cooperazione.</div>
+    </div>
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">05</div>
+      <div class="tavolo-name">Cultura e Identità</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Patrimonio, creatività, politica culturale diffusa e partecipazione come metodo permanente.</div>
+    </div>
+    <div class="tavolo-item reveal">
+      <div class="tavolo-num">06</div>
+      <div class="tavolo-name">Qualità della Democrazia Locale</div>
+      <div class="tavolo-line"></div>
+      <div class="tavolo-desc">Trasparenza, accessibilità della PA, chiarezza dei processi decisionali, democrazia partecipativa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="section-label">I valori</div>
+  <h2 class="section-title reveal">Il manifesto<br>dell'alleanza</h2>
+
+  <div class="manifesto-layout">
+    <div class="valori-list">
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Responsabilità istituzionale.</strong> Governare significa assumersi il peso delle scelte, rispondere alla comunità e agire nell'interesse generale.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Riformismo.</strong> La capacità di cambiare la realtà senza distruggerla: innovare, migliorare, correggere ciò che non funziona, senza scorciatoie ideologiche.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Giustizia sociale e coesione.</strong> Contrasto alle disuguaglianze, tutela dei diritti, inclusione attiva, dignità del lavoro, attenzione alle fragilità.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Centralità delle nuove generazioni.</strong> Partecipazione, formazione, cultura e opportunità come leve reali di emancipazione.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Democrazia partecipativa.</strong> La cittadinanza non si ascolta una volta ogni cinque anni, ma si coinvolge nei processi decisionali con trasparenza e continuità.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Pluralismo e unità.</strong> L'alleanza è un progetto comune, non una somma di veti: si allarga e si rafforza a partire da una guida riconosciuta e da un metodo condiviso.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Etica pubblica.</strong> Sobrietà, rifiuto dei personalismi. Il linguaggio, i comportamenti e la trasparenza sono parte della politica.</div>
+      </div>
+      <div class="valore-item reveal">
+        <div class="valore-dot"></div>
+        <div class="valore-text"><strong>Sguardo lungo.</strong> La città va governata pensando al futuro, non inseguendo il passato o l'immediato.</div>
+      </div>
+    </div>
+
+    <div class="manifesto-sidebar reveal">
+      <div class="quote-block">
+        <div class="quote-mark">"</div>
+        <div class="quote-content">
+          Il passato va riconosciuto. Il presente va governato.
+          <strong>Il futuro va costruito.</strong>
+        </div>
+        <div class="quote-author">Paolo De Maio · Sindaco di Nocera Inferiore</div>
+      </div>
+      <div class="sindaco-card">
+        <div class="sindaco-name">Paolo De Maio</div>
+        <div class="sindaco-role">Sindaco di Nocera Inferiore · Promotore degli Stati Generali</div>
+        <div class="sindaco-desc">Eletto nel 2022, per dieci anni consigliere comunale nella precedente amministrazione civica, riformista e moderata. Promotore e presidente della Cabina di regia degli Stati Generali dei Progressisti, Riformisti e Moderati.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTECIPA -->
+<section id="partecipa">
+  <div class="partecipa-layout">
+    <div>
+      <div class="section-label">Partecipa</div>
+      <h2 class="section-title reveal">Il futuro<br>si costruisce insieme</h2>
+      <p class="section-intro reveal">Non ti chiediamo una fede. Ti chiediamo un contributo. Un'idea, un problema reale da mettere sul tavolo, una proposta praticabile.</p>
+
+      <div class="modi-list">
+        <div class="modo-item reveal">
+          <div class="modo-icon">①</div>
+          <div class="modo-text">
+            <strong>Invia un contributo scritto</strong>
+            Un'idea, un problema, una proposta concreta per la tua città.
+          </div>
+        </div>
+        <div class="modo-item reveal">
+          <div class="modo-icon">②</div>
+          <div class="modo-text">
+            <strong>Partecipa a un tavolo tematico</strong>
+            Scegli l'area che ti interessa e porta la tua esperienza.
+          </div>
+        </div>
+        <div class="modo-item reveal">
+          <div class="modo-icon">③</div>
+          <div class="modo-text">
+            <strong>Partecipa all'assemblea conclusiva</strong>
+            L'assemblea è aperta a tutta la città. Porta la tua voce.
+          </div>
+        </div>
+        <div class="modo-item reveal">
+          <div class="modo-icon">④</div>
+          <div class="modo-text">
+            <strong>Diffondi l'iniziativa</strong>
+            Condividi con la tua rete. Più siamo, più forte è la proposta.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partecipa-form reveal">
+      <div class="form-title">Aderisci al percorso</div>
+      <div class="form-subtitle">Compila il modulo — ti contatteremo con tutte le informazioni</div>
+
+      <div class="form-group">
+        <label class="form-label">Nome e cognome *</label>
+        <input type="text" class="form-input" placeholder="Il tuo nome">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input type="email" class="form-input" placeholder="La tua email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Organizzazione / quartiere</label>
+        <input type="text" class="form-input" placeholder="Facoltativo">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Area di interesse</label>
+        <select class="form-select">
+          <option value="">Seleziona un tavolo tematico</option>
+          <option>Coesione sociale</option>
+          <option>Giovani e opportunità</option>
+          <option>Territorio e sostenibilità</option>
+          <option>Economia e lavoro</option>
+          <option>Cultura e identità</option>
+          <option>Qualità della democrazia locale</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">La tua proposta o idea</label>
+        <textarea class="form-textarea" placeholder="Descrivi in modo sintetico..."></textarea>
+      </div>
+      <button class="form-submit">Invia la tua adesione →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">NOCERA <span>DOMANI</span></span>
+      <p class="footer-tagline">Stati Generali dei Progressisti, Riformisti e Moderati di Nocera Inferiore. Promossi dal Sindaco Paolo De Maio e dalla coalizione che lo sostiene.</p>
+      <span class="footer-hashtag">#NoceraDomani</span>
+    </div>
+    <div>
+      <div class="footer-col-title">Il percorso</div>
+      <ul class="footer-links">
+        <li><a href="#percorso">Le quattro fasi</a></li>
+        <li><a href="#chi">Chi partecipa</a></li>
+        <li><a href="#tavoli">I sei tavoli</a></li>
+        <li><a href="#manifesto">Il manifesto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Partecipa</div>
+      <ul class="footer-links">
+        <li><a href="#partecipa">Aderisci</a></li>
+        <li><a href="#partecipa">Invia un contributo</a></li>
+        <li><a href="#partecipa">Partecipa ai tavoli</a></li>
+        <li><a href="mailto:info@nocerinferiore.it">Contattaci</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Coalizione dei Progressisti, Riformisti e Moderati · Nocera Inferiore</span>
+    <span class="footer-claim">«Il futuro va costruito.»</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80 * (Array.from(reveals).indexOf(entry.target) % 4));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit (statico)
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    const nome = document.querySelector('.form-input').value.trim();
+    if (!nome) { alert('Inserisci il tuo nome per procedere.'); return; }
+    this.textContent = '✓ Adesione inviata — ti contatteremo presto';
+    this.style.background = 'var(--blu-mid)';
+    this.disabled = true;
+  });
+
+  // Nav highlight
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 80) {
+      nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
